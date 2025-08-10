@@ -1,8 +1,8 @@
 import { getEmployees } from "@/mock-api";
+import { Filter } from "@/widgets/Filter";
 import { SearchInput } from "@/widgets/SearchInput";
 import { Table } from "@/widgets/Table";
 import { useMemo } from "react";
-import { Filter } from "./widgets/Filter";
 import { useFilteredEmployees } from "./hooks/useFilteredEmployees";
 
 export default function App() {

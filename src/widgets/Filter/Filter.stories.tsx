@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Filter } from "./Filter";
+import { Filter } from "./index";
 
 const meta: Meta<typeof Filter> = {
   title: "Widgets/Filter",
