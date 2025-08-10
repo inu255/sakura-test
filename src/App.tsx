@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { getEmployees } from "@/mock-api";
 import { Table } from "@/widgets/Table";
+import { Filter } from "./widgets/Filter";
 
 export default function App() {
   const employees = useMemo(() => getEmployees(), []);
@@ -19,23 +20,13 @@ export default function App() {
     return employees.filter((e) => e.department === filterDept);
   }, [employees, filterDept]);
 
+  const options = useMemo(() => {
+    return departments.map((d) => ({ label: d, id: d }));
+  }, [departments]);
+
   return (
-    <div className="w-full max-w-[1280px] px-4 mx-auto overflow-x-auto">
-      <label>
-        Фильтр по отделу:{" "}
-        <select
-          value={filterDept}
-          onChange={(e) => setFilterDept(e.target.value)}
-          style={{ marginBottom: 10 }}
-        >
-          <option value="">Все</option>
-          {departments.map((d) => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
-      </label>
+    <div className="w-full max-w-[1280px] px-4 mx-auto overflow-x-auto ">
+      <Filter options={options} onChange={setFilterDept} />
 
       <Table employees={filtered} />
     </div>
