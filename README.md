@@ -31,7 +31,7 @@ qwe.ru
 
 1. **Клонируйте репозиторий:**
    ```bash
-   git clone https://github.com/inu255/banka.git
+   git clone https://github.com/inu255/sakura-test.git
    cd banka
    ```
 
