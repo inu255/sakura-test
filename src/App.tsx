@@ -1,51 +1,26 @@
-import { useDebounce } from "@/hooks/useDebounce";
 import { getEmployees } from "@/mock-api";
 import { SearchInput } from "@/widgets/SearchInput";
 import { Table } from "@/widgets/Table";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Filter } from "./widgets/Filter";
+import { useFilteredEmployees } from "./hooks/useFilteredEmployees";
 
 export default function App() {
   const employees = useMemo(() => getEmployees(), []);
-  const [filterDept, setFilterDept] = useState<string>("");
-
-  // Собираем список уникальных департаментов для фильтра
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 300);
-  const departments = useMemo(() => {
-    const setDept = new Set<string>();
-    employees.forEach((e) => setDept.add(e.department));
-    return Array.from(setDept);
-  }, [employees]);
-
-  // Фильтрация
-  const filtered = useMemo(() => {
-    let filteredEmployees = employees;
-
-    if (filterDept) {
-      filteredEmployees = filteredEmployees.filter((e) => e.department === filterDept);
-    }
-
-    if (debouncedSearchTerm) {
-      filteredEmployees = filteredEmployees.filter((e) =>
-        e.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-      );
-    }
-
-    return filteredEmployees;
-  }, [employees, filterDept, debouncedSearchTerm]);
-
-  const options = useMemo(() => {
-    return departments.map((d) => ({ label: d, id: d }));
-  }, [departments]);
+  const { filteredEmployees, departmentOptions, searchTerm, setSearchTerm, setFilterDept } =
+    useFilteredEmployees(employees);
 
   return (
-    <div className="w-full max-w-[1280px] px-4 mx-auto overflow-x-auto">
-      <SearchInput value={searchTerm} onChange={setSearchTerm} />
+    <div className="w-full max-w-[1280px] px-4 mx-auto overflow-x-auto prose">
+      <h1>Сотрудники</h1>
 
-      <Filter options={options} onChange={setFilterDept} />
+      <div className="flex gap-2 flex-col md:flex-row">
+        <SearchInput value={searchTerm} onChange={setSearchTerm} />
 
-      <Table employees={filtered} />
+        <Filter options={departmentOptions} onChange={setFilterDept} />
+      </div>
+
+      <Table employees={filteredEmployees} />
     </div>
   );
 }
