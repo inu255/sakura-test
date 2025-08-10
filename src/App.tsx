@@ -3,7 +3,7 @@ import { Filter } from "@/widgets/Filter";
 import { SearchInput } from "@/widgets/SearchInput";
 import { Table } from "@/widgets/Table";
 import { useMemo } from "react";
-import { useFilteredEmployees } from "./hooks/useFilteredEmployees";
+import { useFilteredEmployees } from "./shared/hooks/useFilteredEmployees";
 
 export default function App() {
   const employees = useMemo(() => getEmployees(), []);

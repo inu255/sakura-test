@@ -1,4 +1,4 @@
-import { Input } from "@/components/base/input/input";
+import { Input } from "@/shared/ui/base/input/input";
 import { SearchMd } from "@untitledui/icons";
 
 type Props = { value: string; onChange: (value: string) => void };

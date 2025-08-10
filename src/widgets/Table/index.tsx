@@ -1,7 +1,8 @@
 import { ArrowUp, ArrowDown } from "@untitledui/icons";
-import { Table as TableComponent } from "@/components/application/table/table";
+import { Table as TableComponent } from "@/shared/ui/application/table/table";
 import { useMemo, useState } from "react";
 import { type Employee } from "@/mock-api";
+import { formatDate } from "@/shared/utils/formatDate";
 
 type Props = { employees: Employee[] };
 
@@ -62,7 +63,7 @@ export function Table({ employees }: Props) {
             <TableComponent.Cell>{emp.position}</TableComponent.Cell>
             <TableComponent.Cell>{emp.department}</TableComponent.Cell>
             <TableComponent.Cell>{emp.salary.toLocaleString("ru-RU")} ₽</TableComponent.Cell>
-            <TableComponent.Cell>{emp.hireDate}</TableComponent.Cell>
+            <TableComponent.Cell>{formatDate(emp.hireDate)}</TableComponent.Cell>
           </TableComponent.Row>
         ))}
       </TableComponent.Body>

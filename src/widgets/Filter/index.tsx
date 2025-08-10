@@ -1,5 +1,5 @@
-import { Select } from "@/components/base/select/select";
-import { SelectItem } from "@/components/base/select/select-item";
+import { Select } from "@/shared/ui/base/select/select";
+import { SelectItem } from "@/shared/ui/base/select/select-item";
 
 type Props = {
   onChange: (value: string) => void;
