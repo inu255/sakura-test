@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { type Employee } from "@/mock-api";
+import { type Employee } from "@/shared/mock-api";
 import { useDebounce } from "./useDebounce";
 
 export function useFilteredEmployees(employees: Employee[]) {

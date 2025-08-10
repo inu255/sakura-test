@@ -1,4 +1,4 @@
-import { getEmployees } from "@/mock-api";
+import { getEmployees } from "@/shared/mock-api";
 import { Filter } from "@/widgets/Filter";
 import { SearchInput } from "@/widgets/SearchInput";
 import { Table } from "@/widgets/Table";

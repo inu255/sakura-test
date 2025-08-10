@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Table } from "./index";
-import { getEmployees } from "@/mock-api";
+import { getEmployees } from "@/shared/mock-api";
 
 const meta: Meta<typeof Table> = {
   title: "Widgets/Table",

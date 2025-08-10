@@ -1,7 +1,7 @@
 import { ArrowUp, ArrowDown } from "@untitledui/icons";
 import { Table as TableComponent } from "@/shared/ui/application/table/table";
 import { useMemo, useState } from "react";
-import { type Employee } from "@/mock-api";
+import { type Employee } from "@/shared/mock-api";
 import { formatDate } from "@/shared/utils/formatDate";
 
 type Props = { employees: Employee[] };
