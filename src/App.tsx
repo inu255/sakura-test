@@ -1,32 +1,43 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import "./styles/globals.css";
+import { useState, useMemo } from "react";
+import { getEmployees } from "@/mock-api";
+import { Table } from "@/widgets/Table";
 
-function App() {
-  const [count, setCount] = useState(0);
+export default function App() {
+  const employees = useMemo(() => getEmployees(), []);
+  const [filterDept, setFilterDept] = useState<string>("");
+
+  // Собираем список уникальных департаментов для фильтра
+  const departments = useMemo(() => {
+    const setDept = new Set<string>();
+    employees.forEach((e) => setDept.add(e.department));
+    return Array.from(setDept);
+  }, [employees]);
+
+  // Фильтрация
+  const filtered = useMemo(() => {
+    if (!filterDept) return employees;
+    return employees.filter((e) => e.department === filterDept);
+  }, [employees, filterDept]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <div className="w-full max-w-[1280px] px-4 mx-auto overflow-x-auto">
+      <label>
+        Фильтр по отделу:{" "}
+        <select
+          value={filterDept}
+          onChange={(e) => setFilterDept(e.target.value)}
+          style={{ marginBottom: 10 }}
+        >
+          <option value="">Все</option>
+          {departments.map((d) => (
+            <option key={d} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <Table employees={filtered} />
+    </div>
   );
 }
-
-export default App;
