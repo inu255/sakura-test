@@ -49,7 +49,8 @@ export function Table({ employees }: Props) {
             Зарплата {sortKey === "salary" ? sortDir === "asc" ? <ArrowUp /> : <ArrowDown /> : ""}
           </TableComponent.Head>
           <TableComponent.Head onClick={() => onSort("hireDate")} style={{ cursor: "pointer" }}>
-            Дата найма {sortKey === "hireDate" ? (sortDir === "asc" ? "▲" : "▼") : ""}
+            Дата найма{" "}
+            {sortKey === "hireDate" ? sortDir === "asc" ? <ArrowUp /> : <ArrowDown /> : ""}
           </TableComponent.Head>
         </TableComponent.Row>
       </TableComponent.Header>

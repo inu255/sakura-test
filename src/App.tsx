@@ -10,6 +10,7 @@ export default function App() {
   const { filteredEmployees, departmentOptions, searchTerm, setSearchTerm, setFilterDept } =
     useFilteredEmployees(employees);
 
+  // TODO состояние загрузки?
   return (
     <div className="w-full max-w-[1280px] px-4 mx-auto overflow-x-auto prose">
       <h1>Сотрудники</h1>

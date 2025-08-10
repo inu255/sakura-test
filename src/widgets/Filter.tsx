@@ -13,7 +13,6 @@ export function Filter({ onChange, options }: Props) {
   return (
     <Select
       onSelectionChange={(value) => onChange(String(value))}
-      style={{ marginBottom: 10 }}
       items={[{ label: "Все", id: "" }, ...options]}
       className="w-64"
       label="Фильтр по отделу"
